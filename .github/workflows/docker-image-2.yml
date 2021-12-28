@@ -9,15 +9,28 @@ on:
 jobs:
 
   build:
-
+    name: Build Docker images
     runs-on: ubuntu-latest
-
+    if: github.event_name != 'pull_request'
     steps:
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: steinvenior
-        password: ${{ secrets.KEY }}
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file .docker/Dockerfile --tag my-image-name:$(date +%s)
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: steinvenior
+          password: ${{ secrets.KEY }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build
+        run: |
+          docker buildx build \
+            --push \
+            --platform linux/amd64  \
+            --tag "ocrmypdf/ocrmypdf:x86" \
+            --file .docker/Dockerfile .
