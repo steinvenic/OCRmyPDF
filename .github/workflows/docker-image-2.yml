@@ -35,5 +35,5 @@ jobs:
           docker buildx build \
             --push \
             --platform linux/amd64  \
-            --tag "ocrmypdf/ocrmypdf:x86" \
+            --tag "steinvenior/ocrmypdf:x86" \
             --file .docker/Dockerfile .
