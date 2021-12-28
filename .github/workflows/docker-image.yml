@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run:  docker buildx build \
+      run:  docker build build \
             --platform linux/amd64  \
             --tag "steinven/ocrmypdf:v1" \
             --file .docker/Dockerfile .
