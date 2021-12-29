@@ -26,14 +26,11 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
 
       - name: Build
         run: |
-          docker buildx build \
+          docker  build \
             --push \
             --platform linux/amd64  \
-            --tag "steinvenior/ocrmypdf:x86" \
+            --tag "steinvenior/ocrmypdf:x86_1" \
             --file .docker/Dockerfile .
