@@ -30,7 +30,5 @@ jobs:
       - name: Build
         run: |
           docker  build \
-            --push \
-            --platform linux/amd64  \
             --tag "steinvenior/ocrmypdf:x86_1" \
             --file .docker/Dockerfile .
